@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Login</title>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <style type="text/css">
+      .label {text-align: right}
+      .error {color: red}
+      span {
+        height: 30px;
+        width: 100px;
+        background-color: #CCFFCC
+      }
+    </style>
+
+  </head>
+
+  <body>
+    <h2>Login</h2>
+    <form method="post">
+      <table>
+        <tr>
+          <td class="label">
+            Username
+          </td>
+          <td>
+            <input type="text" name="username" value="{{username}}">
+          </td>
+        </tr>
+
+        <tr>
+          <td class="label">
+            Password
+          </td>
+          <td>
+            <input type="password" name="password" value="">
+          </td>
+        </tr>
+      </table>
+
+      <div class="error">
+        {{error}}
+      </div>
+
+      <input type="submit">
+      <span>
+        <a href="/signup">Sign up</a>
+      </span>
+    </form>
+  </body>
+
+</html>
