@@ -4,7 +4,7 @@ import random
 import hashlib
 import hmac
 from string import letters
-
+import datetime
 import webapp2
 import jinja2
 
@@ -125,7 +125,7 @@ class Post(db.Model):
     content = db.TextProperty(required = True)
     created = db.DateTimeProperty(auto_now_add = True)
     created_by = db.StringProperty(required = True)
-    last_modified = db.DateTimeProperty(auto_now = True)
+    last_modified = db.DateTimeProperty(auto_now = True)    
 
     def render(self):
         self._render_text = self.content.replace('\n', '<br>')
@@ -161,6 +161,7 @@ class NewPost(BlogHandler):
         subject = self.request.get('subject')
         content = self.request.get('content')
         created_by = self.user.name
+        age = 15;
         if subject and content:
             p = Post(parent = blog_key(), subject = subject, content = content,created_by = created_by)
             p.put()
@@ -258,6 +259,13 @@ class Logout(BlogHandler):
         self.logout()
         self.redirect('/signup')
 
+class Profile(BlogHandler):
+    def get(self,user_name):
+        user_name += "'";
+        user_name = "'" + user_name;
+        posts = greetings = db.GqlQuery("select * from Post where created_by = %s order by created desc"%user_name);
+        self.render('profile.html', posts = posts)
+
 
 app = webapp2.WSGIApplication([
                                ('/', BlogFront),
@@ -266,5 +274,6 @@ app = webapp2.WSGIApplication([
                                ('/signup', Register),
                                ('/login', Login),
                                ('/logout', Logout),
+                               ('/([a-zA-Z0-9_]+)',Profile)
                                ],
                               debug=True)
