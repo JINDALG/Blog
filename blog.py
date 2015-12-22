@@ -171,7 +171,7 @@ class NewPost(BlogHandler):
 
 
 
-USER_RE = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")
+USER_RE = re.compile(r"^[a-zA-Z 0-9_-]{3,20}$")
 def valid_username(username):
     return username and USER_RE.match(username)
 
@@ -198,18 +198,18 @@ class Signup(BlogHandler):
                       email = self.email)
         self.username = self.username.lower();
         if not valid_username(self.username):
-            params['error_username'] = "That's not a valid username."
+            params['error_username'] = "Enter a valid username."
             have_error = True
 
         if not valid_password(self.password):
-            params['error_password'] = "That wasn't a valid password."
+            params['error_password'] = "Enter a valid password."
             have_error = True
         elif self.password != self.verify:
             params['error_verify'] = "Your passwords didn't match."
             have_error = True
 
         if not valid_email(self.email):
-            params['error_email'] = "That's not a valid email."
+            params['error_email'] = "Enter a valid email."
             have_error = True
 
         if have_error:

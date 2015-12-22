@@ -1,70 +1,65 @@
 <!DOCTYPE html>
-
-<html>
+<html >
   <head>
-    <title>Sign Up</title>
-    <style type="text/css">
-      .label {text-align: right}
-      .error {color: red}
-    </style>
-
+    <meta charset="UTF-8">
+    <title>Blog</title>
+    <link rel="stylesheet" href="../static/login-reset.css">
+    <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>  
+    <link rel="stylesheet" href="../static/login-style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   </head>
 
   <body>
-    <h2>Signup</h2>
+
+<div class="pen-title">
+      <h1>Blog</h1>
+    </div>
+
+<div class="container">
+  <div class="card"></div>
+  <div class="card alt">
+    <h1 class="title">Register</h1>
     <form method="post">
-      <table>
-        <tr>
-          <td class="label">
-            Username
-          </td>
-          <td>
-            <input type="text" name="username" value="{{username}}">
-          </td>
-          <td class="error">
-            {{error_username}}
-          </td>
-        </tr>
-
-        <tr>
-          <td class="label">
-            Password
-          </td>
-          <td>
-            <input type="password" name="password" value="">
-          </td>
-          <td class="error">
-            {{error_password}}
-          </td>
-        </tr>
-
-        <tr>
-          <td class="label">
-            Verify Password
-          </td>
-          <td>
-            <input type="password" name="verify" value="">
-          </td>
-          <td class="error">
-            {{error_verify}}
-          </td>
-        </tr>
-
-        <tr>
-          <td class="label">
-            Email (optional)
-          </td>
-          <td>
-            <input type="text" name="email" value="{{email}}">
-          </td>
-          <td class="error">
-            {{error_email}}
-          </td>
-        </tr>
-      </table>
-
-      <input type="submit">
+    <div class="error">{{error_username}}</div>
+      <div class="input-container">
+        <input type="text" name="username" value="{{username}}" required="required"/>
+        <label for="Username">Pick a Username</label>
+        <div class="bar"></div>
+      </div>
+      <div class="error">{{error_email}}</div>
+      <div class="input-container">
+        <input type="email" name="email" value="{{email}}" required="required"/>
+        <label for="email">Your Email</label>
+        <div class="bar"></div>
+      </div>
+      <div class="error">{{error_password}}</div>
+      <div class="input-container">
+        <input type="password" name="password" required="required"/>
+        <label for="Password">Create Password</label>
+        <div class="bar"></div>
+      </div>
+      <div class="error">{{error_verify}}</div>
+      <div class="input-container">
+        <input type="password" name="verify" required="required"/>
+        <label for="Repeat Password">Repeat Password</label>
+        <div class="bar"></div>
+      </div>
+      <div class="button-container">
+        <button type="submit"><span>Sign Up for Blog</span></button>
+      </div>
     </form>
+  </div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('input').focus(function() {
+      $('.error').hide();
+    })
+  })
+</script>
+    
+    
+    
   </body>
-
 </html>

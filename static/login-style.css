@@ -112,15 +112,15 @@ body {
 
 .card .error {
   position: relative;
-  margin: 0 0 30px;
-  padding: 10px 0 10px 30px;
+  margin: 0 0 5px;
+  padding: 0px 0 0px 60px;
   color: #ed2553;
   font-size: 20px;
   font-weight: 300;
 }
 .card .input-container {
   position: relative;
-  margin: 0 60px 50px;
+  margin: 0 60px 30px;
 }
 .card .input-container input {
   outline: none;
@@ -197,7 +197,6 @@ body {
   font-size: 24px;
   font-weight: 600;
   line-height: 1;
-  text-transform: uppercase;
   overflow: hidden;
   -webkit-transition: .3s ease;
   transition: .3s ease;
