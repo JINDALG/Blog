@@ -1,53 +1,44 @@
 <!DOCTYPE html>
-
-<html>
+<html >
   <head>
-    <title>Login</title>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <style type="text/css">
-      .label {text-align: right}
-      .error {color: red}
-      span {
-        height: 30px;
-        width: 100px;
-        background-color: #CCFFCC
-      }
-    </style>
-
+    <meta charset="UTF-8">
+    <title>Blog</title>
+    <link rel="stylesheet" href="../static/login-reset.css">
+    <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>  
+    <link rel="stylesheet" href="../static/login-style.css">
+    
   </head>
 
   <body>
-    <h2>Login</h2>
-    <form method="post">
-      <table>
-        <tr>
-          <td class="label">
-            Username
-          </td>
-          <td>
-            <input type="text" name="username" value="{{username}}">
-          </td>
-        </tr>
 
-        <tr>
-          <td class="label">
-            Password
-          </td>
-          <td>
-            <input type="password" name="password" value="">
-          </td>
-        </tr>
-      </table>
-
-      <div class="error">
-        {{error}}
+    <div class="pen-title">
+      <h1>Blog</h1>
+    </div>
+    <div class="container">
+      <div class="card"></div>
+      <div class="card">
+        <h1 class="title">Login</h1>
+        <form method="post">
+          <h5 class="error">{{error}}</h5>
+          <div class="input-container">
+            <input type="text"  id="username" name="username" required="required" value="{{username}}" />
+            <label for="username">Username</label>
+            <div class="bar"></div>
+          </div>
+          <div class="input-container">
+            <input type="password" id = "passowrd" name="password" required="required"/>
+            <label for="password">Password</label>
+            <div class="bar"></div>
+          </div>
+          <div class="button-container">
+            <button><span>Go</span></button>
+          </div>
+          <div class="footer">
+            <a href="/signup"><span>Create Account</span></a>
+          </div>
+        </form>
       </div>
-
-      <input type="submit">
-      <span>
-        <a href="/signup">Sign up</a>
-      </span>
-    </form>
+    </div>
   </body>
-
 </html>

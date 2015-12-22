@@ -64,10 +64,6 @@ def render_post(response, post):
     response.out.write('<b>' + post.subject + '</b><br>')
     response.out.write(post.content)
 
-class MainPage(BlogHandler):
-  def get(self):
-      self.write('Hello, Udacity!')
-
 
 ##### user stuff
 def make_salt(length = 5):
@@ -133,8 +129,10 @@ class Post(db.Model):
 
 class BlogFront(BlogHandler):
     def get(self):
-        posts = greetings = db.GqlQuery("select * from Post order by created desc")
-        self.render('front.html', posts = posts)
+        posts = greetings = db.GqlQuery("select * from Post order by created desc");
+        userlist = db.GqlQuery("select * from User");
+        self.render('front.html', posts = posts,userlist=userlist);
+
 
 class PostPage(BlogHandler):
     def get(self, post_id):
@@ -198,7 +196,7 @@ class Signup(BlogHandler):
 
         params = dict(username = self.username,
                       email = self.email)
-
+        self.username = self.username.lower();
         if not valid_username(self.username):
             params['error_username'] = "That's not a valid username."
             have_error = True
@@ -251,13 +249,13 @@ class Login(BlogHandler):
             self.login(u)
             self.redirect('/')
         else:
-            msg = 'Invalid login'
+            msg = "The username and password you entered don't match."
             self.render('login-form.html', error = msg)
 
 class Logout(BlogHandler):
     def get(self):
         self.logout()
-        self.redirect('/signup')
+        self.redirect('/')
 
 class Profile(BlogHandler):
     def get(self,user_name):
