@@ -7,20 +7,21 @@
     <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>  
     <link rel="stylesheet" href="../static/login-style.css">
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
   </head>
 
   <body>
 
     <div class="pen-title">
-      <h1>Blog</h1>
+  <span><a href="/"><h1 title="Home page">Blog</h1></a></span>
     </div>
     <div class="container">
       <div class="card"></div>
       <div class="card">
         <h1 class="title">Login</h1>
         <form method="post">
-          <h5 class="error">{{error}}</h5>
+          <div class="error">{{error}}</div>
           <div class="input-container">
             <input type="text"  id="username" name="username" required="required" value="{{username}}" />
             <label for="username">Username</label>
@@ -39,6 +40,13 @@
           </div>
         </form>
       </div>
+      <script type="text/javascript">
+  $(document).ready(function() {
+    $('input').focus(function() {
+      $('.error').hide();
+    })
+  })
+</script>
     </div>
   </body>
 </html>

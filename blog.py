@@ -262,7 +262,8 @@ class Profile(BlogHandler):
         user_name += "'";
         user_name = "'" + user_name;
         posts = greetings = db.GqlQuery("select * from Post where created_by = %s order by created desc"%user_name);
-        self.render('profile.html', posts = posts)
+        userlist = db.GqlQuery("select * from User");
+        self.render('profile.html', posts = posts,userlist=userlist)
 
 
 app = webapp2.WSGIApplication([

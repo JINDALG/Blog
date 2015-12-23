@@ -2,9 +2,21 @@
 
 {% block content %}
 
-  {% for p in posts %}
-    {{ p.render() | safe }}
-    <br><br>
-  {% endfor %}
+
+    {% for p in posts %}
+        {{ p.render() | safe }}
+
+    {% endfor %}
+</div>
+  <div class="user">
+      <div class="user-tab">
+          Users
+      </div>
+
+  	{% for u in userlist %}
+  		<div class="username"><a title="Profile" href="/{{u.name}}">{{u.name}}</a></div>
+  	{% endfor %}
+  </div>
 
 {% endblock %}
+    

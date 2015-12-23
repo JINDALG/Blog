@@ -1,34 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link type="text/css" rel="stylesheet" href="../static/main.css" />
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <title>Blog</title>
+  <head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+    <link rel="stylesheet" href="../static/login-reset.css">
+    <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>  
+    <link rel="stylesheet" href="../static/login-style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+      
+  </head>
 </head>
 
 <body>
-  <a href="/" class="main-title">
-    Blog
-  </a>
+        <div class="header">
+        <ul>
+            <li><span title="Home"><a href="/">Home</a></span></li>|
+            <li><span title="Upload Something"><a href="/blog/newpost">Create Newpost</a></span></li>
+            {% if user %}
+                |<li><span title="Profile"><a href="/{{user.name}}">{{user.name}}</a></span></li>
+                |<li><span><a href="/logout">Logout</a></span></li>
+            {% else %}
+                |<li><span><a href="/login">Login</a></span></li>
+                |<li><span><a href="/signup">Sign Up</a></span></li>
+            {% endif %}
+        </ul>
 
-  <div class="login-area">
-    <a href="/blog/newpost">Newpost</a>
-    {% if user %}
-      <a class="login-link" href="/{{user.name}}">{{user.name}}</a>
-    {% endif %}
-    {% if user %}
-      <a class="login-link" href="/logout">logout</a>
-    {% else %}
-      <a class="login-link" href="/login">login</a>
-      |
-      <a class="login-link" href="/signup">signup</a>
-    {% endif %}
-  </div>
-
+    </div>
+    
   <div id="content">
   {% block content %}
   {% endblock %}
   </div>
+  <script type="text/javascript">
+      $(document).ready(function () {
+          $(".user-tab").click(function () {
+              $(".username").slideToggle("slow");
+          });
+      });
+</script>
 </body>
 
 </html>

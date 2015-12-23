@@ -9,14 +9,20 @@ body {
 
 /* Pen Title */
 .pen-title {
-  padding: 50px 0;
-  text-align: center;
-  letter-spacing: 2px;
+    position:relative;
+    padding: 30px 0;
+    text-align: center;
+    letter-spacing: 2px;
 }
 .pen-title h1 {
-  margin: 0 0 20px;
+  margin: 0 0 10px;
   font-size: 48px;
-  font-weight: 300;
+}
+
+.pen-title span a {
+  color: #006699;
+  font-weight: 500;
+  text-decoration: none;
 }
 
 /* Container */
@@ -93,7 +99,6 @@ body {
 }
 .card:first-child {
   background: #fafafa;
-  height: 10px;
   border-radius: 5px 5px 0 0;
   margin: 0 10px;
   padding: 0;
@@ -101,10 +106,10 @@ body {
 .card .title {
   position: relative;
   z-index: 1;
-  border-left: 5px solid #ed2553;
+  border-left: 5px solid #006699;
   margin: 0 0 35px;
   padding: 10px 0 10px 50px;
-  color: #ed2553;
+  color: #006699;
   font-size: 32px;
   font-weight: 600;
   text-transform: uppercase;
@@ -112,9 +117,9 @@ body {
 
 .card .error {
   position: relative;
-  margin: 0 0 5px;
+  margin: 0 0 20px;
   padding: 0px 0 0px 60px;
-  color: #ed2553;
+  color: #006699;
   font-size: 20px;
   font-weight: 300;
 }
@@ -169,7 +174,7 @@ body {
 .card .input-container .bar:before, .card .input-container .bar:after {
   content: '';
   position: absolute;
-  background: #ed2553;
+  background: #006699;
   width: 0;
   height: 2px;
   -webkit-transition: .2s ease;
@@ -191,7 +196,7 @@ body {
   position: relative;
   display: inline-block;
   background: 0;
-  width: 240px;
+  width: 200px;
   border: 2px solid #e3e3e3;
   padding: 20px 0;
   font-size: 24px;
@@ -214,7 +219,7 @@ body {
   top: 50%;
   left: 50%;
   display: block;
-  background: #ed2553;
+  background: #006699;
   width: 30px;
   height: 30px;
   border-radius: 100%;
@@ -224,10 +229,10 @@ body {
   transition: .3s ease;
 }
 .card .button-container button:hover, .card .button-container button:active, .card .button-container button:focus {
-  border-color: #ed2553;
+  border-color: #006699;
 }
 .card .button-container button:hover span, .card .button-container button:active span, .card .button-container button:focus span {
-  color: #ed2553;
+  color: #006699;
 }
 .card .button-container button:active span, .card .button-container button:focus span {
   color: #ffffff;
@@ -251,8 +256,8 @@ body {
   transition: .3s ease;
 }
 .card .footer a:hover span, .card .footer a:active span, .card .footer a:focus span {
-  color: #ed2553;
-  border: 0px solid #ed2553;
+  color: #006699;
+  border: 0px solid #006699;
 }
 
 
@@ -268,4 +273,127 @@ body {
     bottom: 30px;
     opacity: 0;
   }
+}
+
+.header {
+  padding: 15px 0;
+  text-align: right;
+  letter-spacing: 2px;
+  font-size: large;
+  position: relative;
+  width:100%;
+  height : auto;
+  background-color:#006699;
+}
+
+    .header ul {
+        margin-right:10%;
+    }
+    .header li {
+        display:inline;
+    }
+
+    .header span:hover {
+        background-color:#0077aa;
+        border-bottom-style:groove
+    }
+    .header span {
+        padding:13px 0;
+    }
+.header span a {
+    height:100%;
+    padding: 13px;
+    color: #e9e9e9;
+    font-weight: 600;
+    text-decoration: none;
+    text-transform:capitalize;
+}
+#content {
+    display:block;
+}
+
+.profile {
+    width:20%;
+    position:relative;
+    float:left;
+}
+.post-container {
+    width:60%;
+    position:relative;
+    display:inline-block;
+    margin-left:20%;
+    vertical-align:top;
+}
+
+.post {
+    border-radius:2%;
+    word-wrap:break-word;
+    background-color:#ffffff;
+    position:relative;
+    margin:2% 0;
+    margin-top: 15px;
+    display:inline-block;
+}
+
+.post-heading {
+    color:#3b5998;
+    text-transform: capitalize;
+    position: relative;
+    padding:2% 1%;
+}
+
+.post-title {
+    display : inline;
+    font-size:x-large;
+    font-weight: bold;
+}
+.post-date {
+    position:relative;
+    text-align:right;
+    color: #999;
+
+}
+.post-tail {
+    position: relative;
+}
+.post-content {
+    font-size:15px;
+    padding:1% 2%;
+    color:#141823;
+}
+
+.user-tab {
+    text-align:center;
+}
+.user {
+    text-align: left;
+    width: 19%;
+    position: relative;
+    letter-spacing: 1px;
+    font-size: large;
+    float: right;
+    display: inline-block;
+    margin: 2% 0;
+    vertical-align:top;
+}
+
+.user div:hover {
+     background-color:#d3d3d3 ;
+     border-bottom-style: groove;
+}
+.username {
+    display:none;
+}
+
+.user div {
+        padding:10px 0;
+    }
+.user div a {
+    width:100%;
+    color: #141823;
+    height:100%;
+    padding: 5% 40%;
+    font-weight: 600;
+    text-transform:capitalize;
+    text-decoration:none;
 }

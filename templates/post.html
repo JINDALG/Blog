@@ -1,19 +1,15 @@
 <div class="post">
   <div class="post-heading">
     <div class="post-title">
-      {{p.subject}}
+      {{p.created_by}} &#8667; {{p.subject}}
     </div>
-
-    <div class="post-date">
+    <span class="post-date">
       {{p.created.strftime("%b %d, %Y")}}
-    </div>
+    </span>
   </div>
   <div class="post-tail">
     <div class="post-content">
       {{p._render_text | safe}}
-    </div>
-    <div class="post-created_by">
-      {{"posted by- "}}{{p.created_by}}
     </div>
   </div>
 </div>
