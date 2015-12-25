@@ -16,8 +16,7 @@
 <body>
         <div class="header">
         <ul>
-            <li><span title="Home"><a href="/">Home</a></span></li>|
-            <li><span title="Upload Something"><a href="/blog/newpost">Create Newpost</a></span></li>
+            <li><span title="Home"><a href="/">Home</a></span></li>
             {% if user %}
                 |<li><span title="Profile"><a href="/{{user.name}}">{{user.name}}</a></span></li>
                 |<li><span><a href="/logout">Logout</a></span></li>
@@ -35,6 +34,10 @@
   </div>
   <script type="text/javascript">
       $(document).ready(function () {
+          $('.post-heading').click(function () {
+              $(this).siblings().slideToggle("slow");
+          });
+         
           $(".user-tab").click(function () {
               $(".username").slideToggle("slow");
           });

@@ -51,7 +51,6 @@ body {
   overflow: hidden;
 }
 
-
 .container.active .card.alt .title,
 .container.active .card.alt .input-container,
 .container.active .card.alt .button-container {
@@ -308,15 +307,8 @@ body {
     text-decoration: none;
     text-transform:capitalize;
 }
-#content {
-    display:block;
-}
 
-.profile {
-    width:20%;
-    position:relative;
-    float:left;
-}
+
 .post-container {
     width:60%;
     position:relative;
@@ -325,14 +317,14 @@ body {
     vertical-align:top;
 }
 
-.post {
+.post,.newpost {
     border-radius:2%;
     word-wrap:break-word;
     background-color:#ffffff;
     position:relative;
     margin:2% 0;
     margin-top: 15px;
-    display:inline-block;
+    display:block;
 }
 
 .post-heading {
@@ -385,6 +377,10 @@ body {
     display:none;
 }
 
+.post-tail {
+    display:none;
+}
+
 .user div {
         padding:10px 0;
     }
@@ -397,3 +393,69 @@ body {
     text-transform:capitalize;
     text-decoration:none;
 }
+.newpost .input-container {
+    word-wrap:break-word;
+    widows:inherit;
+    padding:1%  4%;
+}
+.newpost .input-container textarea {
+    padding:1% 0;
+    outline:none;
+    z-index:1;
+    border:0;
+    width:100%;
+    position:relative;
+}
+
+#newpost-content {
+    font-size:medium;
+    font-weight:300;
+    border-top:groove;
+}
+#newpost-title {
+    font-size:large;
+    font-weight:600;
+    
+}
+
+.newpost-button-container {
+  margin: 0 60px;
+  text-align: right;
+}
+.newpost-button-container button {
+    background-color:#006699;
+  outline: 0;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  width: 10%;
+  padding: 1%;
+  font-size: large;
+  font-weight: 600;
+  line-height: 1;
+  overflow: hidden;
+  border-radius:10%;
+}
+
+.user-info {
+    margin:1% 0;
+    width:60%;
+    margin-left:20%;
+    position: relative;
+    letter-spacing: 1px;
+    font-size: large;   
+    display: inline-block;
+    vertical-align:top;
+}
+    .user-info table {
+        width:50%;
+         padding:.5% 0;
+    }
+.user-info tr {
+    display:table-row;
+    padding:1% 0;
+    height:24px;
+}
+    .user-info div td {
+        position:relative;
+    }

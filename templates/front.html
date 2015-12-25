@@ -1,13 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="post-container">
-    {% for p in posts %}
-        {{ p.render() | safe }}
 
-    {% endfor %}
-</div>
-  <div class="user">
+    <div class="post-container">
+      <div class="newpost">
+        <form method="post">
+          <div class="input-container">
+              <textarea id ="newpost-title" name="subject" cols="80" placeholder="Title" required="required">{{subject}}</textarea>
+            <div class="bar"></div>
+          </div>
+          <div class="input-container">
+              <textarea  id="newpost-content" name="content" cols="80" placeholder="What's new" required="required">{{content}}</textarea>
+            <div class="bar"></div>
+          </div>
+          <div class="newpost-button-container">
+            <button><span>Post</span></button>
+          </div>
+        </form>
+      </div>
+   </div>
+<script>
+    $('textarea').keydown(function() { 
+        this.style.height = (this.scrollHeight > this.clientHeight) ? (this.scrollHeight - 24) + "px" : this.style.height;
+    })
+</script>
+<div class="user">
       <div class="user-tab">
           Users
       </div>
@@ -16,5 +33,10 @@
   		<div class="username"><a title="Profile" href="/{{u.name}}">{{u.name}}</a></div>
   	{% endfor %}
   </div>
+<div class="post-container">
+    {% for p in posts %}
+        {{ p.render() | safe }}
+    {% endfor %}
+</div>
 {% endblock %}
     

@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 
+
 {% block content %}
-
-
-    {% for p in posts %}
-        {{ p.render() | safe }}
-
-    {% endfor %}
+<div class="user-info">
+        <table>
+            <tr><td>Name</td><td>{{check_user.fullname}}</td></tr>
+            <tr><td>Username</td><td>{{check_user.name}}</td></tr>
+            <tr><td>Contact</td><td>{{check_user.mobile}}</td></tr>
+            <tr><td>Email</td><td>{{check_user.email}}</td></tr>
+        </table>
 </div>
-  <div class="user">
+<div class="user">
       <div class="user-tab">
           Users
       </div>
@@ -17,6 +19,13 @@
   		<div class="username"><a title="Profile" href="/{{u.name}}">{{u.name}}</a></div>
   	{% endfor %}
   </div>
+<div class="post-container">
+    {% for p in posts %}
+        {{ p.render() | safe }}
+
+    {% endfor %}
+    
+</div>
 
 {% endblock %}
     

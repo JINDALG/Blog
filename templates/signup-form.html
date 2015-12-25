@@ -20,6 +20,12 @@
   <div class="card alt">
     <h1 class="title">Register</h1>
     <form method="post">
+        <div class="error">{{error_fullname}}</div>
+      <div class="input-container">
+        <input type="text" name="fullname" value="{{fullname}}" required="required"/>
+        <label for="fullname">Fullname</label>
+        <div class="bar"></div>
+      </div>
     <div class="error">{{error_username}}</div>
       <div class="input-container">
         <input type="text" name="username" value="{{username}}" required="required"/>
@@ -30,6 +36,12 @@
       <div class="input-container">
         <input type="email" name="email" value="{{email}}" required="required"/>
         <label for="email">Your Email</label>
+        <div class="bar"></div>
+      </div>
+        <div class="error">{{error_mobile}}</div>
+      <div class="input-container">
+        <input type="text" name="mobile" value="{{mobile}}" required="required"/>
+        <label for="mobile">Contact</label>
         <div class="bar"></div>
       </div>
       <div class="error">{{error_password}}</div>

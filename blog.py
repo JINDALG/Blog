@@ -83,7 +83,9 @@ def users_key(group = 'default'):
     return db.Key.from_path('users', group)
 
 class User(db.Model):
+    fullname = db.StringProperty(required=True)
     name = db.StringProperty(required = True)
+    mobile = db.StringProperty(required = True)
     pw_hash = db.StringProperty(required = True)
     email = db.StringProperty()
 
@@ -97,12 +99,14 @@ class User(db.Model):
         return u
 
     @classmethod
-    def register(cls, name, pw, email = None):
+    def register(cls,fullname, name, pw,mobile, email = None):
         pw_hash = make_pw_hash(name, pw)
         return User(parent = users_key(),
+                    fullname=fullname,
                     name = name,
                     pw_hash = pw_hash,
-                    email = email)
+                    email = email,
+                    mobile= mobile)
 
     @classmethod
     def login(cls, name, pw):
@@ -130,8 +134,26 @@ class Post(db.Model):
 class BlogFront(BlogHandler):
     def get(self):
         posts = greetings = db.GqlQuery("select * from Post order by created desc");
-        userlist = db.GqlQuery("select * from User");
-        self.render('front.html', posts = posts,userlist=userlist);
+        if self.user:
+            temp = self.user.name;
+            temp += "'";
+            temp = "'" + temp;
+            userlist = db.GqlQuery("select * from User where name != %s "%temp);
+            self.render('front.html', posts = posts,userlist=userlist);
+        else :
+            userlist = db.GqlQuery("select * from User ");
+            self.render('front.html', posts = posts,userlist=userlist);
+
+    def post(self):
+        if not self.user:
+            self.redirect('/login')
+        if self.user:
+            subject = self.request.get('subject')
+            content = self.request.get('content')
+            created_by = self.user.name
+            p = Post(parent = blog_key(), subject = subject, content = content,created_by = created_by)
+            p.put()
+            self.redirect('/%s' % str(p.key().id()))
 
 
 class PostPage(BlogHandler):
@@ -142,38 +164,25 @@ class PostPage(BlogHandler):
         if not post:
             self.error(404)
             return
-
-        self.render("permalink.html", post = post)
-
-class NewPost(BlogHandler):
-    def get(self):
-        if self.user:
-            self.render("newpost.html")
-        else:
-            self.redirect("/login")
-
-    def post(self):
-        if not self.user:
-            self.redirect('/')
-
-        subject = self.request.get('subject')
-        content = self.request.get('content')
-        created_by = self.user.name
-        age = 15;
-        if subject and content:
-            p = Post(parent = blog_key(), subject = subject, content = content,created_by = created_by)
-            p.put()
-            self.redirect('/blog/%s' % str(p.key().id()))
-        else:
-            error = "subject and content, please!"
-            self.render("newpost.html", subject=subject, content=content, error=error)
+        temp = self.user.name;
+        temp += "'";
+        temp = "'" + temp;
+        userlist = db.GqlQuery("select * from User where name != %s "%temp);
+        self.render("permalink.html", post = post,userlist=userlist)
 
 
 
+fullname_RE = re.compile(r"^[a-zA-Z ]{3,20}$")
+def valid_fullname(fullname):
+    return fullname and fullname_RE.match(fullname)
 
 USER_RE = re.compile(r"^[a-zA-Z 0-9_-]{3,20}$")
 def valid_username(username):
     return username and USER_RE.match(username)
+
+mobile_re = re.compile(r"^[0-9]{10,12}")
+def valid_mobile(mobile):
+    return mobile and mobile_re.match(mobile)
 
 PASS_RE = re.compile(r"^.{3,20}$")
 def valid_password(password):
@@ -189,14 +198,29 @@ class Signup(BlogHandler):
 
     def post(self):
         have_error = False
+        self.fullname = self.request.get('fullname')
         self.username = self.request.get('username')
         self.password = self.request.get('password')
         self.verify = self.request.get('verify')
         self.email = self.request.get('email')
-
-        params = dict(username = self.username,
-                      email = self.email)
+        self.mobile = self.request.get('mobile')
+        
         self.username = self.username.lower();
+        params = dict(username = self.username,
+                      email = self.email,
+                      mobile = self.mobile,
+                      fullname = self.fullname)
+        self.fullname = self.fullname.capitalize();
+
+
+        if not valid_fullname(self.fullname):
+            params['fullname'] = "Enter a valid Name"
+            have_error = True
+
+        if not valid_mobile(self.mobile):
+            params['error_mobile'] = "Enter a valid Contact Number"
+            have_error = True
+
         if not valid_username(self.username):
             params['error_username'] = "Enter a valid username."
             have_error = True
@@ -230,7 +254,7 @@ class Register(Signup):
             msg = 'That user already exists.'
             self.render('signup-form.html', error_username = msg)
         else:
-            u = User.register(self.username, self.password, self.email)
+            u = User.register(self.fullname,self.username, self.password,self.mobile, self.email)
             u.put()
 
             self.login(u)
@@ -243,7 +267,7 @@ class Login(BlogHandler):
     def post(self):
         username = self.request.get('username')
         password = self.request.get('password')
-
+        username = username.lower();
         u = User.login(username, password)
         if u:
             self.login(u)
@@ -259,17 +283,27 @@ class Logout(BlogHandler):
 
 class Profile(BlogHandler):
     def get(self,user_name):
+        if self.user:
+            temp = self.user.name
+            temp += "'"
+            temp  = "'" + temp
+        check_user = User.by_name(user_name)
         user_name += "'";
         user_name = "'" + user_name;
-        posts = greetings = db.GqlQuery("select * from Post where created_by = %s order by created desc"%user_name);
-        userlist = db.GqlQuery("select * from User");
-        self.render('profile.html', posts = posts,userlist=userlist)
+        if check_user:
+            posts = greetings = db.GqlQuery("select * from Post where created_by = %s order by created desc"%user_name);
+            if self.user:
+                userlist = db.GqlQuery("select * from User where name != %s"%temp);
+            else :
+                userlist = db.GqlQuery("select * from User");
+            self.render('profile.html', posts = posts,userlist=userlist,check_user=check_user)
+        else :
+            self.redirect('/')
 
 
 app = webapp2.WSGIApplication([
                                ('/', BlogFront),
-                               ('/blog/([0-9]+)', PostPage),
-                               ('/blog/newpost', NewPost),
+                               ('/([0-9]+)', PostPage),
                                ('/signup', Register),
                                ('/login', Login),
                                ('/logout', Logout),

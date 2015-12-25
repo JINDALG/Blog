@@ -1,5 +1,20 @@
+
 {% extends "base.html" %}
 
 {% block content %}
-  {{post.render() | safe}}
+
+   <div class="post-container">
+        {{ post.render() | safe }}
+</div>
+  <div class="user">
+      <div class="user-tab">
+          Users
+      </div>
+
+  	{% for u in userlist %}
+  		<div class="username"><a title="Profile" href="/{{u.name}}">{{u.name}}</a></div>
+  	{% endfor %}
+  </div>
+
 {% endblock %}
+    
